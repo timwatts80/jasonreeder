@@ -6,7 +6,6 @@
  */
 
 import { UI } from '@/components/ui';
-import { designTokens } from '@/lib/design-tokens';
 
 export default function ExamplePage() {
   return (

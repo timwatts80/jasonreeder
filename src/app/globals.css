@@ -121,6 +121,54 @@ footer a:hover {
   color: var(--color-accent) !important;
 }
 
+/* Hero headline responsive sizing */
+.hero-headline {
+  font-size: var(--font-size-h2); /* 32px on mobile */
+}
+
+/* Hero text responsive display */
+.hero-mobile-breaks {
+  display: block; /* Show mobile version by default */
+}
+
+.hero-desktop-text {
+  display: none; /* Hide desktop version on mobile */
+}
+
+/* Hero background image responsive positioning */
+.hero-bg-image {
+  background-position: 0% 30% !important; /* Positioned at left edge, 30% from top on mobile */
+  background-size: 270% !important; /* 270% size on mobile */
+}
+
+/* Hero gradient responsive direction */
+.hero-gradient {
+  background: linear-gradient(to top, var(--color-primary) 30%, transparent) !important; /* Bottom to top on mobile */
+}
+
+@media (min-width: 1024px) {
+  .hero-headline {
+    font-size: var(--font-size-h1); /* 48px on desktop */
+  }
+  
+  .hero-bg-image {
+    background-position: center 30% !important; /* Centered on desktop */
+    background-size: cover !important; /* Normal cover size on desktop */
+  }
+  
+  .hero-gradient {
+    background: linear-gradient(to left, var(--color-primary) 30%, transparent) !important; /* Left to right on desktop */
+  }
+  
+  .hero-mobile-breaks {
+    display: none; /* Hide mobile version on desktop */
+  }
+  
+  .hero-desktop-text {
+    display: block; /* Show desktop version on desktop */
+  }
+}
+
 /* Typography System */
 
 h1 {

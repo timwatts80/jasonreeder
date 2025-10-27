@@ -10,6 +10,7 @@ const navigation = [
   { name: 'Approach', href: '/approach' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Partner', href: '/partner' },
+  { name: 'Book Call', href: '/book-call' },
 ];
 
 export default function Header() {
@@ -25,7 +26,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <nav className="container-custom py-4">
+      <nav className="container-custom py-4 relative">
         <div className="flex items-center justify-between">
           {/* Logo/Brand */}
           <Link 
@@ -103,32 +104,34 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Navigation Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 flex flex-col gap-4">
-            {navigation.map((item) => (
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+            <div className="container-custom py-6 flex flex-col gap-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-left py-3 px-1 transition-colors text-base ${
+                    isActiveRoute(item.href)
+                      ? 'text-[var(--color-primary)] font-medium'
+                      : 'text-gray-600 hover:text-[var(--color-primary)]'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              {/* Mobile CTA Button */}
               <Link
-                key={item.name}
-                href={item.href}
-                className={`text-left py-3 px-1 transition-colors text-base ${
-                  isActiveRoute(item.href)
-                    ? 'text-[var(--color-primary)] font-medium'
-                    : 'text-gray-600 hover:text-[var(--color-primary)]'
-                }`}
+                href="/partner"
+                className="btn-header-cta w-full mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item.name}
+                Partner with Jason
               </Link>
-            ))}
-            
-            {/* Mobile CTA Button */}
-            <Link
-              href="/partner"
-              className="btn-header-cta w-full mt-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Partner with Jason
-            </Link>
+            </div>
           </div>
         )}
       </nav>

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { designTokens } from '@/lib/design-tokens';
 
 // Typography Components
 export const Typography = {

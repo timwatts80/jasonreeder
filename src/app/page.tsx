@@ -1,9 +1,66 @@
+'use client';
+
+import { useState } from 'react';
 import Hero from '@/components/Hero'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import FundingForm from '@/components/FundingForm'
 import Link from 'next/link'
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setMessage('Please enter your email address');
+      setSubmitStatus('error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle'); // Reset status
+    
+    try {
+      const response = await fetch('/api/newsletter-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      let data;
+      const contentType = response.headers.get('content-type');
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        // Handle non-JSON responses
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Server returned an unexpected response');
+      }
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setMessage(data.message || 'Successfully subscribed to newsletter!');
+        setEmail('');
+      } else {
+        setSubmitStatus('error');
+        setMessage(data.error || 'Failed to subscribe. Please try again.');
+      }
+    } catch (error) {
+      console.error('Newsletter submission error:', error);
+      setSubmitStatus('error');
+      setMessage('Failed to subscribe. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen">
       <Hero />
@@ -317,7 +374,7 @@ export default function Home() {
                   <svg className="w-6 h-6 mr-3" style={{ color: 'var(--color-accent)' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                   </svg>
-                  <span className="font-medium text-lg">5+ Years Experience</span>
+                  <span className="font-medium text-lg">5+ Investor Years Experience</span>
                 </div>
               </div>
             </div>
@@ -361,16 +418,21 @@ export default function Home() {
               Join our investor list to receive market insights, deal alerts, and progress reports — all written in plain language.
             </p>
             
-            <form className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent"
+                value={email || ''}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent disabled:opacity-50"
                 style={{ fontFamily: 'var(--font-body)' }}
+                key="newsletter-email"
               />
               <button 
                 type="submit"
-                className="px-6 py-3 rounded-lg transition-all duration-300 whitespace-nowrap"
+                disabled={isSubmitting}
+                className="px-6 py-3 rounded-lg transition-all duration-300 whitespace-nowrap disabled:opacity-50"
                 style={{
                   backgroundColor: 'var(--color-primary)',
                   color: 'white',
@@ -378,9 +440,20 @@ export default function Home() {
                   fontWeight: '500'
                 }}
               >
-                Join Our Investor List
+                {isSubmitting ? 'Subscribing...' : 'Join Our Investor List'}
               </button>
             </form>
+            
+            {/* Status Messages */}
+            {submitStatus !== 'idle' && (
+              <div className={`mt-4 p-4 rounded-lg max-w-lg mx-auto ${
+                submitStatus === 'success' 
+                  ? 'bg-green-50 border border-green-200 text-green-800'
+                  : 'bg-red-50 border border-red-200 text-red-800'
+              }`}>
+                <p className="text-sm font-medium">{message}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

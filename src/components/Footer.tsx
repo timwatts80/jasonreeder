@@ -13,10 +13,12 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/jason-reeder-1a7758109/" 
                 style={{ color: 'var(--color-accent)' }}
                 className="hover:text-white transition-colors"
                 aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -34,6 +36,32 @@ export default function Footer() {
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                   <rect width="4" height="12" x="2" y="9"></rect>
                   <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a 
+                href="https://instagram.com/theprofessionaljreeder" 
+                style={{ color: 'var(--color-accent)' }}
+                className="hover:text-white transition-colors"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="lucide lucide-instagram" 
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                 </svg>
               </a>
             </div>
@@ -98,10 +126,10 @@ export default function Footer() {
                   <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                 </svg>
                 <a 
-                  href="mailto:jason@reederpartnerships.com" 
+                  href="mailto:ceo@jreeder-reisolutions.com" 
                   className="transition-colors"
                 >
-                  jason@reederpartnerships.com
+                  ceo@jreeder-reisolutions.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -121,10 +149,10 @@ export default function Footer() {
                   <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1 2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
                 </svg>
                 <a 
-                  href="tel:+15551234567" 
+                  href="tel:+13852519781" 
                   className="transition-colors"
                 >
-                  (555) 123-4567
+                  (385) 251-9781
                 </a>
               </div>
             </div>

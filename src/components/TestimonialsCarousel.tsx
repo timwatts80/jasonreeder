@@ -7,25 +7,25 @@ const testimonials = [
     id: 1,
     quote: "Jason's ability to identify and execute on profitable opportunities is unmatched. His transparent communication and proven track record made our partnership decision easy.",
     name: "Michael K.",
-    title: "Private Investor, Seattle"
+    title: "Private Lender, Florida"
   },
   {
     id: 2,
     quote: "Working with Jason has been incredibly rewarding. His speed of execution and attention to detail throughout every phase gives us complete confidence in our investments.",
     name: "Sarah C.",
-    title: "Investment Group, Portland"
+    title: "Real Estate Acquisition, Texas"
   },
   {
     id: 3,
     quote: "Jason delivers exactly what he promises, when he promises it. His deep market knowledge and honest approach make him an ideal long-term partner.",
     name: "David R.",
-    title: "Real Estate Fund, Vancouver"
+    title: "Real Estate Disposition, Utah"
   },
   {
     id: 4,
     quote: "The level of detail in Jason's reporting and his proactive communication style sets him apart. We always know exactly where our investment stands.",
     name: "Jennifer L.",
-    title: "Family Office, San Francisco"
+    title: "Wholesaler, Missouri"
   }
 ];
 
